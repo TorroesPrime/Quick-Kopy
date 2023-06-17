@@ -1,0 +1,31 @@
+{
+    "settings": {
+        "font": "Arial",
+        "font_size": 12,
+        "main bg": "#00ff00",
+        "bg": "#ffffff",
+        "fg": "#000000",
+        "width": 350,
+        "height": 200,
+        "title": "Germanna ACE Quick Copy",
+        "layout": null,
+        "button font": [],
+        "button font size": 16,
+        "button bg": "#ffffff",
+        "button fg": "#000000",
+        "button padding x": 5,
+        "button padding y": 5,
+        "button size": 25,
+        "label font": "Arial",
+        "label size": 16,
+        "frame bg": "#00ff40"
+    },
+    "user items": {
+        "ACE helpful handouts": "https://germanna.edu/academic-center-excellence/helpful-handouts\n",
+        "Forum Signature": "<p><a class=\"inline_disabled\" href=\"https://germanna.edu/academic-center-excellence/ace-online-tutoring\" target=\"_blank\" rel=\"noopener noreferrer\"><img id=\"144635941\" style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"/users/3190/files/144635941/preview?verifier=7rRTlLepIU92KW9ELVsrMhmNlwaqpB3GaibRxgtH\" alt=\"signature.png\" /></a></p>\n",
+        "Zoom Link": "https://vccs.zoom.us/j/8588542644\n",
+        "SI announcement template": "<p>Greetings! By now you should be getting about [chapter content mention]</p>\n<p>But getting help is also part of the learning process. And with that thought in mind, I am announcing the first session of Supplemental Instruction for this class will be held Sunday morning starting at 9 am. There is no pre-reg to attend the session and it is free to students. I will be primarily focusing on the material from chapter 3 but I can branch out into any other material in the course if needed. So if you're stuck with assignments from chapter 1 or 2, or just not understanding how input() works, come to SI and let me know and I'll go over it.</p>\n<p>To attend SI, simply <a class=\"inline_disabled\" href=\"https://vccs.zoom.us/j/8588542644\" target=\"_blank\" rel=\"noopener noreferrer\">click this link</a>.</p>\n<p>&nbsp;</p>\n<p><a class=\"inline_disabled\" href=\"https://germanna.edu/academic-center-excellence/tutoring-appointment-request\" target=\"_blank\" rel=\"noopener noreferrer\"><img id=\"144635941\" style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"/users/3190/files/144635941/preview?verifier=7rRTlLepIU92KW9ELVsrMhmNlwaqpB3GaibRxgtH\" alt=\"signature.png\" /></a></p>\n",
+        "Zoom Survey": "https://www.surveymonkey.com/r/?sm=3ONkpd%2bXaS6msJ08XMhq7A%3d%3d\n",
+        "ACE Appointment Form": "https://germanna.edu/academic-center-excellence/tutoring-appointment-request\n"
+    }
+}
