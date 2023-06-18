@@ -1,100 +1,54 @@
 import json
-import os
-import sys
 import tkinter as tk
 from functools import partial
-from pathlib import Path
 from tkinter import ttk
 from tkinter.colorchooser import askcolor
 
 from PIL import Image, ImageTk
 
-config_name = 'myapp.cfg'
-global APP_DIR, user_info, settings, default_settings, DEBUG
-# determine if application is a script file or frozen exe
-if getattr(sys, 'frozen', False):
-    APP_DIR = Path(sys.executable).parent
-else:
-    APP_DIR = Path(__file__).parent
+from quick_kopy.config import (
+    DEFAULT_JSON,
+    APP_ICON,
+    GERMANNA_LOGO,
+    USER_JSON,
+    DEBUG,
+    DEFAULT_SETTINGS,
+    SystemFonts,
+)
 
-DATA_DIR = APP_DIR / 'data'
-DEFAULT_JSON = DATA_DIR / 'default.json'
-USER_JSON = DATA_DIR / 'user.json'
-GERMANNA_LOGO = DATA_DIR / 'Germanna-Logo-Red.png'
-APP_ICON = DATA_DIR / 'icon.ico'
-
-DEBUG = False
-executable_path = sys.argv[0]
-# Get the directory containing the executable file
-# os.chdir(APP_DIR)
 user_info = {}
-default_settings = {"font": "Arial",
-            "font_size": 12,
-            "main bg": "#34363b",
-            "bg": "#ffffff",
-            "fg": "#000000",
-            "width": 350,
-            "height": 200,
-            "title": "Germanna ACE Quick Copy",
-            "layout":None,
-            "button font": "Arial",
-            "button font size": 16,
-            "button bg": "#ffffff",
-            "button fg": "#000000",
-            "button padding x": 5,
-            "button padding y": 5,
-            "button font":(),
-            "button size":25,
-            "label font":"Arial",
-            "label size":16,
-            "frame bg": "#ffffff"}
-system_fonts = [
-    "Arial",
-    "Helvetica",
-    "Verdana",
-    "Tahoma",
-    "Times New Roman",
-    "Georgia",
-    "Courier New",
-    "Monaco",
-]
 
 settings = {}
 
 def gen_clean_files():
-    global APP_DIR
     with open(DEFAULT_JSON, 'w') as f:
-        json.dump(default_settings, f, indent=4)
+        json.dump(DEFAULT_SETTINGS, f, indent=4)
     with open(USER_JSON, 'w') as f:
-        json.dump({"settings": default_settings, "user items":{}}, f, indent=4)
+        json.dump({"settings": DEFAULT_SETTINGS, "user items":{}}, f, indent=4)
 
 def load_user_file(override=False):
-    global default_settings, user_info, settings,DEBUG
-    with open(DEFAULT_JSON) as f:
-        default_settings = json.load(f)
-        if DEBUG:
-            print("Len: ", len(default_settings))
+    global user_info, settings
     if not override:
-        if os.path.exists(USER_JSON):
+        if USER_JSON.exists():
             with open(USER_JSON) as f:
                 set_data = json.load(f)
                 settings = set_data["settings"]
                 user_info = set_data["user items"]
         else:
             open(USER_JSON, "w").close()
-            settings = default_settings
+            settings = DEFAULT_SETTINGS
     else:
-        open(USER_JSON, "w").close()
-        settings = default_settings
+        USER_JSON.write_text('')
+        settings = DEFAULT_SETTINGS
 
 def save_user_file(override=False):
-    global user_info, settings, default_settings, APP_DIR
+    global user_info, settings
     with open(USER_JSON, 'w') as f:
-        set_Data = default_settings if override else settings
+        set_Data = DEFAULT_SETTINGS if override else settings
         json.dump({"settings": set_Data, "user items":user_info}, f, indent=4)
 
 class remove_item_window():
-    global user_info,settings,default_settings,APP_DIR
+    global user_info,settings
 
     def __init__(self,root) -> None:
         self.root = tk.Toplevel(root)
@@ -162,7 +116,7 @@ class about_window():
         self.root.destroy()
 
 class settings_window():
-    global user_info,settings,default_settings,APP_DIR
+    global user_info,settings
 
     def __init__(self,root) -> None:
         self.root = tk.Toplevel(root)
@@ -198,7 +152,7 @@ class settings_window():
             row=2,column=1,padx=5,pady=5)
         tk.Label(self.mainframe,text="font",bg=settings["bg"],fg=settings["fg"]\
         ,font=(settings["label font"],12)).grid(row=3,column=0,padx=5,pady=5)
-        self.font = ttk.Combobox(self.mainframe,values=system_fonts,\
+        self.font = ttk.Combobox(self.mainframe,values=list(SystemFonts),\
             state="readonly")
         self.font.set(settings["font"])
         self.font.grid(row=3,column=1,padx=5,pady=5)
@@ -231,7 +185,7 @@ class settings_window():
 
     def restore_defaults(self):
         global settings
-        settings = default_settings
+        settings = DEFAULT_SETTINGS
         self.btn_demo.configure(fg=settings["fg"])
         self.font_clr_btn.configure(bg=settings["fg"])
         self.btn_demo.configure(bg=settings["button bg"])
@@ -267,7 +221,7 @@ class settings_window():
                 font=(settings["label font"],12))
 
 class add_item_window():
-    global user_info,settings,default_settings,APP_DIR
+    global user_info,settings
 
     def __init__(self,root) -> None:
         self.root = tk.Toplevel(root)
@@ -315,7 +269,7 @@ class add_item_window():
         save_user_file()
 
 class main_window():
-    global user_info,settings,default_settings,APP_DIR
+    global user_info,settings
 
     def draw_menu(self,root):
         menubar = tk.Menu(root)
