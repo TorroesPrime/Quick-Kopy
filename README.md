@@ -2,12 +2,14 @@
 
 Purpose: just a little tool to allow myself and others in my office to build and maintain a mini-library of materials an items that we routinely need to paste into different items while providing a simple to use GUI for the purpose.
 
+
 ## Table of Contents
 
 - [Quick-Kopy](#quick-kopy)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Building](#building-an-executable)
 
 ## Installation
 
@@ -31,3 +33,19 @@ to remove an item from the repository, click on the 'remove item' option in the 
 to change the visual appearance of the program, click on "settings" in the menu tab. This will open a window that will allow you to change the font size, font color, font, window background color, window pane, and button background colors. You can also restore the default program settings by clicking the 'restore defaults' button. When you are done changing the settings, close the 'settings' window. Changes will be applied immediately.
 
 ![Settings window](./GFX/settings_item.png)
+
+## Building an executable
+
+1. Install Poetry (`pip install poetry`)
+2. Install the project dependencies (`poetry install --with dev`)
+3. Build; if you'd like to use the provided spec file fr convenience, use this:
+
+    ```sh
+    poetry run pyinstaller .\quick_kopy.spec
+    ```
+
+    Alternatively, you can build manually:
+
+    ```sh
+    poetry run pyinstaller -F -n "Quick-Kopy" --add-data "./quick_kopy/data;./quick_kopy/data" -i "./quick_kopy/data/icon.ico" ./quick_kopy/main.pyw
+    ```

@@ -1,0 +1,28 @@
+{
+    "settings": {
+        "font": "Arial",
+        "font_size": 12,
+        "main_bg": "#00ff00",
+        "bg": "#ffffff",
+        "fg": "#000000",
+        "width": 350,
+        "height": 200,
+        "title": "Germanna ACE Quick Copy",
+        "layout": null,
+        "button_font": "Arial",
+        "button_font_size": 16,
+        "button_bg": "#ffffff",
+        "button_fg": "#000000",
+        "button_padding_x": 5,
+        "button_padding_y": 5,
+        "button_size": 25,
+        "label_font": "Arial",
+        "label_size": 16,
+        "frame_bg": "#00ff40"
+    },
+    "user_items": {
+        "ACE helpful handouts": "https://germanna.edu/academic-center-excellence/helpful-handouts\n",
+        "Zoom Survey": "https://www.surveymonkey.com/r/?sm=3ONkpd%2bXaS6msJ08XMhq7A%3d%3d\n",
+        "ACE Appointment Form": "https://germanna.edu/academic-center-excellence/tutoring-appointment-request\n"
+    }
+}
