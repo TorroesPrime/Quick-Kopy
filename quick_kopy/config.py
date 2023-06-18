@@ -1,22 +1,22 @@
 """Global configration options"""
 
+import importlib.resources as pkg_resources
 import sys
 from enum import Enum
 from pathlib import Path
 from typing import TypedDict
 
-APP_DIR = (
-    Path(sys._MEIPASS)  # type: ignore[attr-defined]  # noqa: SLF001
-    if getattr(sys, 'frozen', False)
-    else Path(__file__).parent
-)
+from quick_kopy import data
 
-DATA_DIR = APP_DIR / 'data'
+with pkg_resources.as_file(pkg_resources.files(data)) as data_dir:
+    DATA_DIR = data_dir
 DEFAULT_JSON = DATA_DIR / 'default.json'
 GERMANNA_LOGO = DATA_DIR / 'Germanna-Logo-Red.png'
 APP_ICON = DATA_DIR / 'icon.ico'
 
-USER_JSON = Path(sys.executable).parent / 'user.json'
+USER_JSON = Path(__file__).parent / 'user.json'
+if getattr(sys, 'frozen', False):
+    USER_JSON = Path(sys.executable).parent / 'user.json'
 
 DEBUG = False
 

@@ -8,7 +8,7 @@ a = Analysis(
     ['./quick_kopy/main.pyw'],
     pathex=[],
     binaries=[],
-    datas=[('./quick_kopy/data', 'data')],
+    datas=[('./quick_kopy/data', './quick_kopy/data')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

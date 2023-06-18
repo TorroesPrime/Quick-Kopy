@@ -15,5 +15,5 @@ Copies selected saved notes right to your clipboard, ready to be pasted.
     Alternatively, you can build manually:
 
     ```sh
-    poetry run pyinstaller -F -n "Quick-Kopy" --add-data "./quick_kopy/data;data" -i "./quick_kopy/data/icon.ico" ./quick_kopy/main.pyw
+    poetry run pyinstaller -F -n "Quick-Kopy" --add-data "./quick_kopy/data;./quick_kopy/data" -i "./quick_kopy/data/icon.ico" ./quick_kopy/main.pyw
     ```

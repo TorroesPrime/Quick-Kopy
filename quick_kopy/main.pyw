@@ -29,7 +29,10 @@ def load_config_file(override: bool = False) -> tuple[AppSettings, dict[str, str
         user_info = set_data["user_items"]
         return settings, user_info
 
-    USER_JSON.write_text('')
+    USER_JSON.write_text(json.dumps({
+        'settings': DEFAULT_SETTINGS,
+        'user_items': {},
+    }, indent=4))
     return DEFAULT_SETTINGS, {}
 
 
