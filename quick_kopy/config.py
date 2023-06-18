@@ -5,17 +5,18 @@ from enum import Enum
 from pathlib import Path
 from typing import TypedDict
 
-
-if getattr(sys, 'frozen', False):
-    APP_DIR = Path(sys.executable).parent
-else:
-    APP_DIR = Path(__file__).parent
+APP_DIR = (
+    Path(sys._MEIPASS)  # type: ignore[attr-defined]  # noqa: SLF001
+    if getattr(sys, 'frozen', False)
+    else Path(__file__).parent
+)
 
 DATA_DIR = APP_DIR / 'data'
 DEFAULT_JSON = DATA_DIR / 'default.json'
-USER_JSON = DATA_DIR / 'user.json'
 GERMANNA_LOGO = DATA_DIR / 'Germanna-Logo-Red.png'
 APP_ICON = DATA_DIR / 'icon.ico'
+
+USER_JSON = Path(sys.executable).parent / 'user.json'
 
 DEBUG = False
 
@@ -77,7 +78,7 @@ DEFAULT_SETTINGS: AppSettings = {
     "button_size": 25,
     "label_font": SystemFonts.ARIAL,
     "label_size": 16,
-    "frame_bg": "#ffffff"
+    "frame_bg": "#ffffff",
 }
 
 COPYRIGHT_TEXT = """

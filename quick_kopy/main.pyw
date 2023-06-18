@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import tkinter as tk
-from functools import cache
+from functools import cache, partial
 from tkinter import ttk
 from tkinter.colorchooser import askcolor
 
@@ -107,7 +107,7 @@ class RemoveItemWindow:
             tk.Button(
                 self.inner_frame,
                 text=title,
-                command=lambda: self.remove_item(title),
+                command=partial(self.remove_item, title),
                 bg=settings["button_bg"],
                 fg=settings["button_fg"],
                 font=(
@@ -117,7 +117,7 @@ class RemoveItemWindow:
                 padx=settings["button_padding_x"],
             ).pack(fill="x", expand=True)
 
-    def remove_item(self: RemoveItemWindow, item: str):
+    def remove_item(self: RemoveItemWindow, item: str) -> None:
         _, user_info = load_config_file()
         user_info.pop(item)
         save_config_file(user_info=user_info)
@@ -136,9 +136,9 @@ class AboutWindow:
         self.root.configure(bg=settings["main_bg"])
         self.root.iconbitmap(APP_ICON)
 
-        with Image.open(GERMANNA_LOGO) as image_path:
-            image_path = image_path.resize((350, 73), Image.LANCZOS)
-            germanna_logo = ImageTk.PhotoImage(image_path)
+        with Image.open(GERMANNA_LOGO) as logo:
+            resized_logo = logo.resize((350, 73), Image.LANCZOS)
+            germanna_logo = ImageTk.PhotoImage(resized_logo)
 
         a = tk.Label(self.root, image=germanna_logo)
         a.image = germanna_logo
@@ -152,7 +152,7 @@ class AboutWindow:
 
         tk.Button(self.root, text="Close", command=self.close_window).pack()
 
-    def close_window(self):
+    def close_window(self: AboutWindow) -> None:
         self.root.destroy()
 
 class SettingsWindow:
@@ -240,7 +240,7 @@ class SettingsWindow:
 
         self.font = ttk.Combobox(
             self.mainframe,
-            values=list(SystemFonts._value2member_map_),
+            values=list(SystemFonts._value2member_map_),  # noqa: SLF001
             state="readonly",
         )
         self.font.set(settings["font"])
@@ -469,10 +469,10 @@ class AddItemWindow:
 
 class MainWindow:
 
-    def __init__(self) -> None:
+    def __init__(self: MainWindow, root: tk.Tk) -> None:
         settings, _ = load_config_file()
 
-        self.root = tk.Tk()
+        self.root = root
         self.root.title("Germanna ACE Quick Copy")
         self.root.geometry(f"{settings['width']}x{settings['height']}")
         self.root.resizable(False, False)
@@ -487,7 +487,8 @@ class MainWindow:
         self.root.geometry(f"{settings['width']}x{total_height}")
 
         if DEBUG:
-            print(f"Total height: {total_height}")
+            # NOTE: You might want to replace this with a proper logger
+            print(f"Total height: {total_height}")  # noqa: T201
 
     def draw_menu(self: MainWindow, root: tk.Tk) -> tk.Menu:
         menubar = tk.Menu(root)
@@ -518,7 +519,7 @@ class MainWindow:
                 entry = tk.Button(
                     self.mainframe,
                     text=title,
-                    command=lambda: self.copy_to_clipboard(text),
+                    command=partial(self.copy_to_clipboard, text),
                     bg=settings["button_bg"],
                     fg=settings["button_fg"],
                     font=(
@@ -548,11 +549,14 @@ class MainWindow:
         child = RemoveItemWindow(self.root)
         child.root.bind("<Destroy>", lambda _event: self.draw_item())
 
-    def settings_window(self):
+    def settings_window(self: MainWindow) -> None:
         SettingsWindow(self.root)
 
-    def about(self):
+    def about(self: MainWindow) -> None:
         AboutWindow(self.root)
 
-app = MainWindow()
-app.root.mainloop()
+
+if __name__ == '__main__':
+    root = tk.Tk()
+    app = MainWindow(root)
+    root.mainloop()
