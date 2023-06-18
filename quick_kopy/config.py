@@ -31,33 +31,58 @@ class SystemFonts(str, Enum):
     VERDANA = "Verdana"
 
 
-class DefaultSettings(TypedDict):
-    pass
+class AppSettings(TypedDict):
+    font: SystemFonts
+    font_size: int
+    main_bg: str
+    bg: str
+    fg: str
+    width: int
+    height: int
+    title: str
+    layout: None
+    button_font: SystemFonts
+    button_font_size: int
+    button_bg: str
+    button_fg: str
+    button_padding_x: int
+    button_padding_y: int
+    button_size: int
+    label_font: SystemFonts
+    label_size: int
+    frame_bg: str
 
 
-class UserSettings(DefaultSettings):
-    pass
+class UserSettings(TypedDict):
+    settings: AppSettings
+    user_items: dict[str, str]
 
 
-DEFAULT_SETTINGS = {
+DEFAULT_SETTINGS: AppSettings = {
     "font": SystemFonts.ARIAL,
     "font_size": 12,
-    "main bg": "#34363b",
+    "main_bg": "#34363b",
     "bg": "#ffffff",
     "fg": "#000000",
     "width": 350,
     "height": 200,
     "title": "Germanna ACE Quick Copy",
     "layout": None,
-    "button font": SystemFonts.ARIAL,
-    "button font size": 16,
-    "button bg": "#ffffff",
-    "button fg": "#000000",
-    "button padding x": 5,
-    "button padding y": 5,
-    "button font": (),
-    "button size": 25,
-    "label font": SystemFonts.ARIAL,
-    "label size": 16,
-    "frame bg": "#ffffff"
+    "button_font": SystemFonts.ARIAL,
+    "button_font_size": 16,
+    "button_bg": "#ffffff",
+    "button_fg": "#000000",
+    "button_padding_x": 5,
+    "button_padding_y": 5,
+    "button_size": 25,
+    "label_font": SystemFonts.ARIAL,
+    "label_size": 16,
+    "frame_bg": "#ffffff"
 }
+
+COPYRIGHT_TEXT = """
+Copyright: Michael G. Cividanes
+June, 2023
+All rights reserved.
+Contact: Michael.cividanes2010@gmail.com
+""".strip()
