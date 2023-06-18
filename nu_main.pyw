@@ -6,8 +6,6 @@ import os
 import sys
 from functools import partial
 from PIL import Image, ImageTk
-from pprint import pprint
-from test_material import test_data
 
 config_name = 'myapp.cfg'
 global APP_DIR, user_info, settings, default_settings, DEBUG
