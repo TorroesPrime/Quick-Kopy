@@ -146,3 +146,5 @@ tests/reports
 .ruff_cache
 
 GFX/Untitled Diagram.drawio
+user.json
+!quick_kopy/data/user.json
